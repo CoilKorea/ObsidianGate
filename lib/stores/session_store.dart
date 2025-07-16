@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+import 'package:supabase_flutter/supabase_flutter.dart'; // ✅ 꼭 들어가 있어야 함
 
 class SessionStore with ChangeNotifier {
   Session? _session;
@@ -61,10 +62,10 @@ class SessionStore with ChangeNotifier {
   // ✅ 수정된 Kakao 로그인 함수
   Future<void> signInWithKakao(String redirectUrl) async {
     try {
-      await Supabase.instance.client.auth.signInWithOAuth(
-        Provider.kakao,
-        redirectTo: redirectUrl,
-      );
+await Supabase.instance.client.auth.signInWithOAuth(
+  OAuthProvider.kakao,
+  redirectTo: redirectUrl,
+);
     } catch (e) {
       throw Exception('카카오 로그인 실패: $e');
     }
